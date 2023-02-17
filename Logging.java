@@ -1,15 +1,14 @@
 import java.util.Scanner;
 
-import org.w3c.dom.html.HTMLBodyElement;
-
 /**
-* This program calculates the volume of a sphere, with a given radius.
-* It also uses try catch to detect errors.
+* This program receives the length of logs from user.
+* From information given, it calculates how much the truck would be able,
+* to contain, with usage of try catch, etc.
 *
 * @author  Sarah Andrew
 * @version 1.0
 *
-* @since   2023-02-14
+* @since   2023-02-16
 */
 
 public final class Logging {
@@ -31,40 +30,45 @@ public final class Logging {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        // create a new scanner
+        // Create a new scanner
         final Scanner scanner = new Scanner(System.in);
 
         // Gets user input
         System.out.println("Enter the log length (0.25, 0.5 or 1): ");
         final String logLengthStr = scanner.nextLine();
 
-        // usage of try catch to detect string input.
+        // Usage of try catch to detect string input.
         try {
             // Convert string to double
             final double logDoub = Double.parseDouble(logLengthStr);
 
-            // declare variables & consts
+            // declare variables & constants.
             final double MAP_LOGS = 20;
             final double MAX_WEIGHT = 1110;
             final double OP_1 = 0.25;
             final double OP_2 = 0.5;
             final double OP_3 = 1;
-            double truckSize = 0;
 
-            // Seeing if satisfy conditions, if negative, end.
-            if (logDoub == OP_1 || OP_2 == 1 || OP_3 == 0.5) {
-                truckSize = (MAX_WEIGHT / (logDoub * MAP_LOGS));
-                // Calculate volume of sphere
+            // Determining amount based on options of logs.
+            if (logDoub == OP_1 || logDoub == OP_2 || logDoub == OP_3) {
+                // Calculate the max number logs on truck
+                final double truckSize = MAX_WEIGHT / (logDoub * MAP_LOGS);
+
+                // Display to user
+                System.out.println("The truck will be able to take "
+                                  + logDoub + " (m) logs in length ");
+                System.out.println("carrying " + truckSize + " logs.");
+
+            // Condition if user enters negative, end.
+            } else if (logDoub < 0) {
+                System.out.println("Please enter positive digits.");
             } else {
-                System.out.println("Please enter lengths listed above");
+                // Executes when user enters number not specified above.
+                System.out.println("Please enter numbers listed above.");
             }
 
-            // display to user
-            System.out.println("The truck will be able to take " + logDoub + "m logs that");
-            System.out.println("can be carried is " + truckSize);
-
         } catch (NumberFormatException error) {
-            // displays error to user.
+            // Displays error to user.
             System.out.print("Please enter valid input."
                 + error.getMessage());
         }
